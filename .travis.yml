@@ -1,0 +1,24 @@
+language: go
+go:
+  - 1.7.x
+  - 1.8.x
+  - 1.9.x
+  - master
+
+os:
+  - linux
+  - osx
+
+matrix:
+  allow_failures:
+    - go: master
+  fast_finish: true
+
+install:
+  - go get github.com/alecthomas/gometalinter
+  - gometalinter --install
+  - go get -t ./...
+
+script:
+  - gometalinter .
+  - go test -v ./...
